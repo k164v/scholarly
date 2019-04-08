@@ -223,8 +223,10 @@ class Author(object):
         else:
             self.id = re.findall(_CITATIONAUTHRE, __data('a')[0]['href'])[0]
             self.url_picture = _HOST+'/citations?view_op=medium_photo&user={}'.format(self.id)
-            self.name = __data.find('h3', class_='gsc_oai_name').text
-            affiliation = __data.find('div', class_='gsc_oai_aff')
+            self.name = __data.find('h3', class_='gs_ai_name').find('a').text
+            affiliation = __data.find('div', class_='gs_ai_aff')
+            #self.name = __data.find('h3', class_='gsc_oai_name').text
+            #affiliation = __data.find('div', class_='gsc_oai_aff')
             if affiliation:
                 self.affiliation = affiliation.text
             email = __data.find('div', class_='gs_ai_eml')
